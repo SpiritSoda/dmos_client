@@ -38,7 +38,7 @@ public class DMOSClient {
             //future.channel().writeAndFlush(sendMsg);
             // 等待连接被关闭
             future.channel().closeFuture().sync();
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             log.error("无法连接父服务器");
         } finally {
             group.shutdownGracefully();
