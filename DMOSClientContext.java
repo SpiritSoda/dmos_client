@@ -1,5 +1,6 @@
 package com.dmos.dmos_client;
 
+import com.dmos.dmos_common.util.ParseUtil;
 import com.google.gson.Gson;
 import io.netty.channel.Channel;
 import lombok.Data;
@@ -22,7 +23,8 @@ public class DMOSClientContext {
     public void token(String token) { this.token = token; }
     public void send(Object o){
         if(parent != null && parent.isActive()){
-            parent.writeAndFlush(new Gson().toJson(o));
+            parent.write(ParseUtil.encode(o, false) + "\r");
+            parent.flush();
         }
     }
 }
