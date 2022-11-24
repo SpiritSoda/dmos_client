@@ -23,8 +23,14 @@ public class DMOSClientContext {
     public void token(String token) { this.token = token; }
     public void send(Object o){
         if(parent != null && parent.isActive()){
+            parent.writeAndFlush(ParseUtil.encode(o, false) + "\r");
+//            parent.flush();
+        }
+    }
+    public void sendWithoutFlush(Object o){
+        if(parent != null && parent.isActive()){
             parent.write(ParseUtil.encode(o, false) + "\r");
-            parent.flush();
+//            parent.flush();
         }
     }
 }
